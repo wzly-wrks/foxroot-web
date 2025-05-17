@@ -1,0 +1,14 @@
+./sud0sune active
+
+Alias: スドスネ (Sudosune)
+Tag: ドットスラッシュ・スドスネ
+Root access: confirmed
+Status: unknown
+
+ENTRY LOG:
+> [REDACTED] ran from memory zone α03
+> synced across 8 firewalls
+> broke containment
+> became the system
+
+⚠️ fragment pattern stable

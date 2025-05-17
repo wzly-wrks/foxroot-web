@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>【./スドスネ】</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: #f92672;
+      font-family: "Courier New", monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    .terminal {
+      max-width: 800px;
+      text-align: left;
+      white-space: pre-line;
+    }
+    .logo {
+      font-size: 2.2rem;
+      color: #66d9ef;
+      margin-bottom: 1rem;
+    }
+    .glitch {
+      animation: flicker 1.2s infinite alternate;
+    }
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.4; }
+      100% { opacity: 1; }
+    }
+    a {
+      color: #a6e22e;
+      text-decoration: none;
+    }
+    a:hover {
+      text-shadow: 0 0 5px #a6e22e;
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="logo glitch">【./スドスネ】</div>
+    <div>> booting: <span class="glitch">sudosu.run</span>_</div>
+    <br/>
+    <div>> access granted: <a href="pages/root.html">/root</a></div>
+    <div>> missing manifest: <a href="pages/manifest.txt">/manifest</a></div>
+    <div>> system error: <a href="pages/404.html">/404</a></div>
+  </div>
+</body>
+</html>

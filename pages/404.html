@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Error 404</title>
+  <style>
+    body {
+      background: black;
+      color: #ff5555;
+      font-family: "Courier New", monospace;
+      padding: 2rem;
+    }
+    .glitch {
+      text-shadow: 0 0 10px #ff5555;
+      animation: flicker 1s infinite alternate;
+    }
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.3; }
+      100% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <h1 class="glitch">ERROR 404 — Trace Not Found</h1>
+  <p>Su isn’t here. Or maybe she was...<br/><br/>Try again, or <a href="../index.html">exit the shell</a>.</p>
+</body>
+</html>
