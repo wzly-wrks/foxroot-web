@@ -26,8 +26,8 @@
             box-shadow: 0 0 15px #66d9ef22, inset 0 0 8px #f92672aa;
             padding: 2rem;
             border-radius: 8px;
-            max-width: 720px;
-            width: 90%;
+            max-width: 900px;
+            width: 95%;
             text-align: left;
             white-space: pre-line;
             position: relative;
@@ -37,12 +37,8 @@
             font-size: 2.5rem;
             color: #66d9ef;
             margin-bottom: 1.5rem;
-            letter-spacing: 2px;
             text-shadow: 0 0 8px #66d9ef99;
-        }
-
-        .glitch {
-            animation: flicker 1.2s infinite alternate;
+            animation: pulse 1.5s infinite ease-in-out alternate;
         }
 
         @keyframes flicker {
@@ -56,6 +52,18 @@
 
             100% {
                 opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            from {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.03);
             }
         }
 
@@ -87,7 +95,7 @@
 </head>
 <body>
     <div class="terminal">
-        <div class="logo glitch">【./スドスネ】</div>
+        <div class="logo">【./スドスネ】</div>
         <div class="prompt-line" id="boot"></div>
         <div class="prompt-line">> access granted: <a href="pages/root.html">/root</a></div>
         <div class="prompt-line">> missing manifest: <a href="pages/manifest.txt">/manifest</a></div>
@@ -97,6 +105,7 @@
     </div>
 
     <audio id="keystroke" src="https://cdn.pixabay.com/audio/2022/03/15/audio_11f5488c36.mp3" preload="auto"></audio>
+
     <script>
         const bootText = [
             '> booting: sudosu.run',
@@ -105,8 +114,10 @@
             '> decrypting user environment...',
             '> ./sud0sune active.'
         ];
+
         const bootEl = document.getElementById("boot");
         let index = 0;
+
         function typeBoot() {
             if (index < bootText.length) {
                 bootEl.innerHTML += bootText[index] + "\n";
