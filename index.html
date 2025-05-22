@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>【./スドスネ】</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+        body {
+            margin: 0;
+            background: radial-gradient(circle at center, #0d0d0d 0%, #000000 100%);
+            color: #f92672;
+            font-family: 'Share Tech Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+            background-size: cover;
+        }
+
+        .terminal {
+            background: rgba(0, 0, 0, 0.85);
+            border: 1px solid #66d9ef44;
+            box-shadow: 0 0 15px #66d9ef22, inset 0 0 8px #f92672aa;
+            padding: 2rem;
+            border-radius: 8px;
+            max-width: 900px;
+            width: 95%;
+            text-align: left;
+            white-space: pre-line;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: #66d9ef;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 8px #66d9ef99;
+            animation: pulse 1.5s infinite ease-in-out alternate;
+        }
+
+        @keyframes flicker {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulse {
+            from {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1.03);
+            }
+        }
+
+        a {
+            color: #a6e22e;
+            text-decoration: none;
+        }
+
+            a:hover {
+                text-shadow: 0 0 5px #a6e22e;
+            }
+
+        input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #f92672;
+            color: #f8f8f2;
+            font-family: 'Share Tech Mono', monospace;
+            font-size: 1rem;
+            width: 100%;
+            outline: none;
+            margin-top: 1rem;
+        }
+
+        .prompt-line {
+            color: #f92672;
+        }
+    
+
+@keyframes blink {
+    from, to { opacity: 0 }
+    50% { opacity: 1 }
+}
+
+input::after {
+    content: "_";
+    animation: blink 1s step-end infinite;
+    color: #f8f8f2;
+}
+@keyframes blink {
+    from, to { opacity: 0 }
+    50% { opacity: 1 }
+}
+</style>
+</head>
+<body>
+    <div class="terminal">
+        <div class="logo">【./スドスネ】</div>
+        <div class="prompt-line" id="boot"></div>
+        <div class="prompt-line">> access granted: <a href="pages/root.html">/root</a></div>
+        <div class="prompt-line">> missing manifest: <a href="pages/manifest.txt">/manifest</a></div>
+        <div class="prompt-line">> system error: <a href="pages/404.html">/404</a></div>
+        <br />
+        <div class="prompt-line">> input: <input type="text" id="cmd" placeholder="type a command and press Enter..." onkeydown="runCommand(event)" autofocus /></div>
+    </div>
+
+<audio id="keystroke" src="https://cdn.pixabay.com/audio/2022/03/15/audio_11f5488c36.mp3" preload="auto"></audio>
+<audio id="bootup" src="https://cdn.pixabay.com/audio/2022/03/01/audio_228dbc9260.mp3" preload="auto"></audio>
+
+
+    <audio id="keystroke" src="https://cdn.pixabay.com/audio/2022/03/15/audio_11f5488c36.mp3" preload="auto"></audio>
+
+    <script>
+        
+        const knownCommands = ['root', 'manifest', '404', 'sudofox', 'whoami', 'exit', 'nfo'];
+
+        const bootEl = document.getElementById("boot");
+        const inputEl = document.getElementById("cmd");
+        let index = 0;
+
+        function typeBoot() {
+            if (index < bootText.length) {
+                bootEl.innerHTML += bootText[index] + "\n";
+                index++;
+                setTimeout(typeBoot, 600);
+            }
+        }
+
+        window.onload = () => {
+            typeBoot();
+            document.getElementById("bootup").play();
+        };
+
+        function runCommand(e) {
+            if (e.key === 'Enter') {
+                const cmd = inputEl.value.trim().toLowerCase();
+                document.getElementById("keystroke").play();
+                switch (cmd) {
+                    case 'root':
+                        window.location.href = 'pages/root.html';
+                        break;
+                    case 'manifest':
+                        window.location.href = 'pages/manifest.txt';
+                        break;
+                    case '404':
+                        window.location.href = 'pages/404.html';
+                        break;
+                    case 'sudofox':
+                        alert('⚠️ Access Denied: SUDOFOX requires admin signature.');
+                        break;
+                    case 'whoami':
+                        alert('./sud0sune — encrypted. untraceable. alive.');
+                        break;
+                    case 'exit':
+                        window.close();
+                        break;
+                    case 'nfo':
+                        window.location.href = 'pages/nfo.html';
+                        break;
+                    default:
+                        alert('command not recognized: ' + cmd);
+                }
+                inputEl.value = '';
+            } else if (e.key === 'Tab') {
+                e.preventDefault();
+                const current = inputEl.value.trim().toLowerCase();
+                const match = knownCommands.find(c => c.startsWith(current));
+                if (match) inputEl.value = match;
+            }
+        }
+
+                e.target.value = '';
+            }
+        }
+    </script>
+</body>
+</html>
