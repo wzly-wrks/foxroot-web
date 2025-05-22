@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Access: .nfo</title>
+  <style>
+    body {
+      background: black;
+      color: #a6e22e;
+      font-family: "Courier New", monospace;
+      padding: 2rem;
+      display: none;
+    }
+    .hidden-content {
+      display: none;
+    }
+    h1 {
+      color: #f92672;
+    }
+    .glow {
+      text-shadow: 0 0 5px #a6e22e;
+    }
+    input {
+      background: transparent;
+      border: 1px solid #f92672;
+      color: #f8f8f2;
+      font-family: "Courier New", monospace;
+      font-size: 1rem;
+      padding: 0.5rem;
+      width: 250px;
+      margin-top: 2rem;
+    }
+    #login {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+    }
+  </style>
+</head>
+<body>
+  <div id="login">
+    <h1 class="glow">.nfo gate // enter passphrase</h1>
+    <input type="password" id="pass" placeholder="••••••••" onkeydown="checkPass(event)" autofocus />
+  </div>
+
+  <div id="content" class="hidden-content">
+    <h1 class="glow">sudosune // hidden lore node</h1>
+    <p>This area is encrypted. For your eyes only.<br><br>You have accessed a secured memory vault.</p>
+    <iframe src="sudosune_private_lore.html" style="width:100%; height:90vh; border:none;"></iframe>
+  </div>
+
+  <script>
+    const PASSWORD = localStorage.getItem("nfo_pass") || "foxonly";
+
+    function checkPass(e) {
+      if (e.key === 'Enter') {
+        const val = e.target.value;
+        if (val === PASSWORD) {
+          document.getElementById("login").style.display = "none";
+          document.body.style.display = "block";
+          document.getElementById("content").style.display = "block";
+        } else {
+          alert("access denied.");
+        }
+      }
+    }
+
+    // Expose ability to reset password from console
+    window.setNfoPassword = function(newPass) {
+      localStorage.setItem("nfo_pass", newPass);
+      alert("Password changed successfully.");
+    };
+  </script>
+</body>
+</html>
