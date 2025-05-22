@@ -17,10 +17,19 @@
     .glow {
       text-shadow: 0 0 5px #a6e22e;
     }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    .cursor {
+      animation: blink 1s step-end infinite;
+      display: inline-block;
+    }
   </style>
 </head>
-<body>
-  <h1 class="glow">root@sudo.sune:~$</h1>
+<body onload="document.getElementById('bootFx').play()">
+  <audio id="bootFx" src="https://cdn.pixabay.com/audio/2022/03/01/audio_228dbc9260.mp3" preload="auto"></audio>
+  <h1 class="glow">root@sudo.sune:~$ <span class="cursor">_</span></h1>
   <p>Full override initialized.<br/>All firewalls bypassed.<br/><br/><em>“She doesn’t log in. She rewrites the protocol.”</em></p>
   <p><a href="../index.html">Return to shell</a></p>
 </body>
