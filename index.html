@@ -91,7 +91,17 @@
         .prompt-line {
             color: #f92672;
         }
-    </style>
+    
+.prompt-line::after {
+    content: "_";
+    animation: blink 1s step-end infinite;
+    color: #f8f8f2;
+}
+@keyframes blink {
+    from, to { opacity: 0 }
+    50% { opacity: 1 }
+}
+</style>
 </head>
 <body>
     <div class="terminal">
@@ -104,18 +114,18 @@
         <div class="prompt-line">> input: <input type="text" id="cmd" placeholder="type a command and press Enter..." onkeydown="runCommand(event)" /></div>
     </div>
 
+<audio id="keystroke" src="https://cdn.pixabay.com/audio/2022/03/15/audio_11f5488c36.mp3" preload="auto"></audio>
+<audio id="bootup" src="https://cdn.pixabay.com/audio/2022/03/01/audio_228dbc9260.mp3" preload="auto"></audio>
+
+
     <audio id="keystroke" src="https://cdn.pixabay.com/audio/2022/03/15/audio_11f5488c36.mp3" preload="auto"></audio>
 
     <script>
-        const bootText = [
-            '> booting: sudosu.run',
-            '> initializing shell...',
-            '> connected to .kitsune_net',
-            '> decrypting user environment...',
-            '> ./sud0sune active.'
-        ];
+        
+        const knownCommands = ['root', 'manifest', '404', 'sudofox', 'whoami', 'exit', 'nfo'];
 
         const bootEl = document.getElementById("boot");
+        const inputEl = document.getElementById("cmd");
         let index = 0;
 
         function typeBoot() {
@@ -125,11 +135,15 @@
                 setTimeout(typeBoot, 600);
             }
         }
-        window.onload = typeBoot;
+
+        window.onload = () => {
+            typeBoot();
+            document.getElementById("bootup").play();
+        };
 
         function runCommand(e) {
             if (e.key === 'Enter') {
-                const cmd = e.target.value.trim().toLowerCase();
+                const cmd = inputEl.value.trim().toLowerCase();
                 document.getElementById("keystroke").play();
                 switch (cmd) {
                     case 'root':
@@ -150,9 +164,21 @@
                     case 'exit':
                         window.close();
                         break;
+                    case 'nfo':
+                        window.location.href = 'pages/nfo.html';
+                        break;
                     default:
                         alert('command not recognized: ' + cmd);
                 }
+                inputEl.value = '';
+            } else if (e.key === 'Tab') {
+                e.preventDefault();
+                const current = inputEl.value.trim().toLowerCase();
+                const match = knownCommands.find(c => c.startsWith(current));
+                if (match) inputEl.value = match;
+            }
+        }
+
                 e.target.value = '';
             }
         }
